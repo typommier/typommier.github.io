@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Knead More Dough · Channahon, Illinois</title>
+    <meta
+      name="description"
+      content="Sourdough and sweets, baked fresh in Channahon. Made at Hive Kitchen."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --plum: #4a2340;
+        --plum-deep: #331728;
+        --berry: #a32639;
+        --gold: #d9a441;
+        --gold-soft: #e7b857;
+        --linen: #faf4e8;
+        --linen-dim: #f0e7d5;
+        --logo-paper: #f4e9d6;
+        --ink: #2a211e;
+        --ink-soft: #5b4e48;
+        --display: "Bricolage Grotesque", "Segoe UI", sans-serif;
+        --serif: "Newsreader", Georgia, serif;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--linen);
+        color: var(--ink);
+        font-family: var(--serif);
+        font-size: 1.06rem;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+      }
+      img { display: block; max-width: 100%; }
+      a { color: inherit; }
+      h1, h2, h3 {
+        font-family: var(--display);
+        font-weight: 600;
+        line-height: 1.12;
+        letter-spacing: -0.015em;
+        color: var(--plum);
+        margin: 0;
+      }
+      p { margin: 0; }
+      .wrap { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+      .note {
+        background: var(--plum-deep);
+        color: var(--linen);
+        text-align: center;
+        font-family: var(--display);
+        font-size: 0.82rem;
+        letter-spacing: 0.04em;
+        padding: 0.7rem 1rem;
+      }
+      .note strong { color: var(--gold); }
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: var(--plum);
+      }
+      .nav-inner {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+        height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+      }
+      .wordmark {
+        font-family: var(--display);
+        font-size: 1.28rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--linen);
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .wordmark span { color: var(--gold); }
+      .nav-links { display: none; align-items: center; gap: 1.75rem; }
+      .nav-links a {
+        font-family: var(--display);
+        font-size: 0.94rem;
+        font-weight: 500;
+        color: rgba(250, 244, 232, 0.8);
+        text-decoration: none;
+        border-bottom: 2px solid transparent;
+        padding-bottom: 2px;
+      }
+      .nav-links a:hover { color: var(--linen); border-color: var(--gold); }
+      .btn {
+        font-family: var(--display);
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 0 1.5rem;
+        border-radius: 999px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .btn-gold { background: var(--gold); color: var(--plum-deep); }
+      .btn-gold:hover { background: var(--gold-soft); }
+      .btn-ghost {
+        border: 1px solid rgba(250, 244, 232, 0.55);
+        color: var(--linen);
+      }
+      .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+      .menu-btn {
+        width: 44px;
+        height: 44px;
+        border: 0;
+        background: transparent;
+        color: var(--linen);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+      .mobile-nav {
+        display: none;
+        border-top: 1px solid rgba(250, 244, 232, 0.15);
+        padding: 0.75rem 1.25rem 1rem;
+      }
+      .mobile-nav.open { display: block; }
+      .mobile-nav a {
+        font-family: var(--display);
+        display: block;
+        padding: 0.65rem 0;
+        color: var(--linen);
+        text-decoration: none;
+      }
+      .hero {
+        position: relative;
+        isolation: isolate;
+        min-height: 70vh;
+        overflow: hidden;
+        background: var(--plum-deep);
+        display: flex;
+        align-items: flex-end;
+      }
+      .hero img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 42%;
+      }
+      .hero-fade {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, #331728, rgba(51, 23, 40, 0.55), rgba(51, 23, 40, 0.2));
+      }
+      .hero-copy {
+        position: relative;
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 3rem 0 3.5rem;
+      }
+      .eyebrow {
+        font-family: var(--display);
+        font-size: 0.76rem;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 0.75rem;
+      }
+      .hero h1 {
+        color: var(--linen);
+        font-size: clamp(2.35rem, 5.2vw, 4.25rem);
+        max-width: 16ch;
+        margin-bottom: 1.25rem;
+      }
+      .hero h1 em { color: var(--gold); font-style: normal; }
+      .hero p {
+        max-width: 32rem;
+        color: rgba(250, 244, 232, 0.88);
+        font-size: 1.12rem;
+        margin-bottom: 2rem;
+      }
+      .row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+      .bakes-intro { padding: 2.75rem 0 2.25rem; }
+      .bakes-intro h2 { font-size: clamp(1.8rem, 3vw, 2.3rem); margin-bottom: 0.5rem; }
+      .muted { color: var(--ink-soft); max-width: 36rem; }
+      .film { display: grid; }
+      .tile { background: var(--plum-deep); overflow: hidden; }
+      .tile img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+      .tile figcaption { padding: 1rem 1.25rem 1.15rem; color: var(--linen); }
+      .tile h3 { color: var(--linen); font-size: 1.15rem; }
+      .tile p { margin-top: 0.35rem; font-size: 0.9rem; line-height: 1.35; color: rgba(250, 244, 232, 0.75); }
+      .events {
+        background: var(--plum);
+        color: var(--linen);
+        padding: 3.5rem 0;
+      }
+      .events-grid {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+        display: grid;
+        gap: 2.5rem;
+        align-items: center;
+      }
+      .events img { width: 100%; border-radius: 0.875rem; background: var(--logo-paper); }
+      .events h2 { color: var(--linen); font-size: clamp(1.8rem, 3.2vw, 2.5rem); margin-bottom: 1rem; }
+      .events p { max-width: 30rem; color: rgba(250, 244, 232, 0.8); margin-bottom: 1.75rem; }
+      .icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 999px;
+        border: 1px solid rgba(250, 244, 232, 0.4);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--linen);
+        text-decoration: none;
+      }
+      .icon:hover { background: var(--gold); color: var(--plum-deep); border-color: var(--gold); }
+      .icon svg { width: 20px; height: 20px; fill: currentColor; }
+      .visit { padding: 4rem 0; }
+      .visit-grid {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+        display: grid;
+        gap: 2.75rem;
+      }
+      .kicker {
+        font-family: var(--display);
+        font-size: 0.76rem;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--berry);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-bottom: 0.75rem;
+      }
+      .kicker i { display: block; width: 24px; height: 2px; background: var(--berry); }
+      .visit h2 { font-size: clamp(1.8rem, 3.2vw, 2.3rem); margin-bottom: 1rem; }
+      table { width: 100%; border-collapse: collapse; margin: 2rem 0; }
+      caption {
+        font-family: var(--display);
+        text-align: left;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--plum);
+        padding-bottom: 0.75rem;
+      }
+      td { padding: 0.65rem 0; }
+      tr { border-top: 1px solid var(--linen-dim); }
+      tr:first-of-type { border-top: 0; }
+      td:first-child { font-weight: 500; color: var(--plum); }
+      td:last-child { text-align: right; color: var(--ink-soft); }
+      .shut { color: #9c8f88; }
+      .contact a { color: var(--berry); font-weight: 500; text-underline-offset: 2px; }
+      .map {
+        overflow: hidden;
+        border-radius: 0.875rem;
+        box-shadow: 0 16px 34px rgba(51, 23, 40, 0.16);
+        position: relative;
+        aspect-ratio: 4 / 3;
+        align-self: start;
+      }
+      .map iframe { display: block; position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+      .quote-wrap { background: var(--linen-dim); border-top: 1px solid var(--linen-dim); padding: 4rem 0; }
+      blockquote {
+        width: min(40rem, calc(100% - 40px));
+        margin: 0 auto;
+        background: var(--linen);
+        border: 1px solid var(--linen-dim);
+        border-radius: 0.875rem;
+        padding: 2.2rem 1.75rem;
+        text-align: center;
+        box-shadow: 0 14px 30px rgba(51, 23, 40, 0.08);
+      }
+      blockquote p { font-size: 1.14rem; font-style: italic; margin-bottom: 1.25rem; }
+      cite { font-family: var(--display); font-style: normal; }
+      cite strong { display: block; color: var(--plum); }
+      cite span {
+        display: block;
+        margin-top: 0.35rem;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--berry);
+      }
+      .stripe { display: flex; height: 10px; }
+      .stripe span { flex: 1; }
+      footer { background: var(--plum-deep); color: rgba(250, 244, 232, 0.65); padding: 2.6rem 0; }
+      .foot {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      .social {
+        font-family: var(--display);
+        border: 1px solid rgba(250, 244, 232, 0.3);
+        color: var(--linen);
+        text-decoration: none;
+        border-radius: 999px;
+        padding: 0.5rem 1.05rem;
+        font-size: 0.86rem;
+        font-weight: 600;
+      }
+      .foot p { width: 100%; font-size: 0.92rem; }
+      @media (min-width: 768px) {
+        .nav-links { display: flex; }
+        .menu-btn { display: none; }
+        .mobile-nav { display: none !important; }
+        .hero { min-height: 84vh; }
+        .film { grid-template-columns: repeat(4, 1fr); }
+        .events-grid, .visit-grid { grid-template-columns: 1fr 1fr; gap: 3.5rem; }
+        blockquote { padding: 2.75rem 2.9rem; }
+      }
+      @media (max-width: 767px) {
+        .film { grid-template-columns: 1fr 1fr; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="note">Concept preview for <strong>Knead More Dough</strong> — this is not the live website.</div>
+    <nav>
+      <div class="nav-inner">
+        <a class="wordmark" href="#top">Knead More <span>Dough</span></a>
+        <div class="nav-links">
+          <a href="#bakes">What We Bake</a>
+          <a href="#events">Events</a>
+          <a href="#visit">Visit</a>
+          <a class="btn btn-gold" href="tel:7085146123">Contact Us!</a>
+        </div>
+        <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" id="menu-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+      <div class="mobile-nav" id="mobile-nav">
+        <a href="#bakes">What We Bake</a>
+        <a href="#events">Events</a>
+        <a href="#visit">Visit</a>
+        <a href="tel:7085146123">Contact Us!</a>
+      </div>
+    </nav>
+
+    <header class="hero" id="top">
+      <img
+        src="images/market-stall.jpg"
+        alt="The Knead More Dough market booth with the painted banner, racks of bagged sourdough and a table of sweets"
+      />
+      <div class="hero-fade"></div>
+      <div class="hero-copy">
+        <p class="eyebrow">Bakery · Channahon, IL</p>
+        <h1>Sourdough and sweets, <em>baked fresh</em> in Channahon.</h1>
+        <p>Sourdough loaves, coffee cakes, cookies and treats. Made at Hive Kitchen and sold right in the storefront.</p>
+        <div class="row">
+          <a class="btn btn-gold" href="#visit">Hours and location</a>
+          <a
+            class="btn btn-ghost"
+            href="https://www.google.com/maps/search/?api=1&query=25520+Pheasant+Ln,+Channahon,+IL"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Get directions</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <section id="bakes">
+      <div class="wrap bakes-intro">
+        <h2>What we bake</h2>
+        <p class="muted">Sourdough, coffee cakes, cookies and sweets, all made and baked in Channahon.</p>
+      </div>
+      <div class="film">
+        <figure class="tile">
+          <img src="images/sourdough-boule-quilt.jpg" alt="A round hand scored sourdough loaf resting on a patchwork quilt" />
+          <figcaption>
+            <h3>Sourdough loaves</h3>
+            <p>Freshly baked. Available in full and half sizes, plus flavored breads.</p>
+          </figcaption>
+        </figure>
+        <figure class="tile">
+          <img src="images/coffee-cake-crumb.jpg" alt="A tray of coffee cake with a thick crumb topping over fruit filling" />
+          <figcaption>
+            <h3>Coffee cakes</h3>
+            <p>A wide variety of coffee cakes: cherry, raspberry, blueberry and apple.</p>
+          </figcaption>
+        </figure>
+        <figure class="tile">
+          <img src="images/small-cookies.jpg" alt="A tray of golden chocolate chip cookies fresh from the oven" />
+          <figcaption>
+            <h3>Cookies and treats</h3>
+            <p>Big and soft. Chocolate chip, peanut butter, monster, red velvet and other varieties.</p>
+          </figcaption>
+        </figure>
+        <figure class="tile">
+          <img src="images/cake-push-ups.jpg" alt="Trays of layered cake push-up cups with frosting and sprinkles" />
+          <figcaption>
+            <h3>Cake push-ups</h3>
+            <p>Layered cake and frosting, beautifully decorated.</p>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="events" id="events">
+      <div class="events-grid">
+        <img
+          src="images/logo.jpg"
+          alt="Knead More Dough logo, a loaf, a mixing bowl and a cupcake above the name in script"
+        />
+        <div>
+          <h2>Fully licensed and insured</h2>
+          <p>Get in touch for special events, large orders, and more!</p>
+          <div class="row">
+            <a class="btn btn-gold" href="tel:7085146123">Contact Us!</a>
+            <a class="icon" href="mailto:kneadmoredough60410@gmail.com" aria-label="Email Knead More Dough">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z" /></svg>
+            </a>
+            <a class="icon" href="https://www.facebook.com/profile.php?id=61576746550180" target="_blank" rel="noopener noreferrer" aria-label="Knead More Dough on Facebook">
+              <svg viewBox="0 0 24 24"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.52 1.49-3.91 3.78-3.91 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.44 2.91h-2.34V22c4.78-.76 8.44-4.92 8.44-9.94Z" /></svg>
+            </a>
+            <a class="icon" href="https://www.instagram.com/kneadmoredough60410/" target="_blank" rel="noopener noreferrer" aria-label="Knead More Dough on Instagram">
+              <svg viewBox="0 0 24 24"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.07.05 1.8.22 2.43.47.66.25 1.22.6 1.77 1.15.55.55.9 1.11 1.15 1.77.25.63.42 1.36.47 2.43.05 1.07.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.07-.22 1.8-.47 2.43-.25.66-.6 1.22-1.15 1.77-.55.55-1.11.9-1.77 1.15-.63.25-1.36.42-2.43.47-1.07.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.07-.05-1.8-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.25-.63-.42-1.36-.47-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.07.22-1.8.47-2.43.25-.66.6-1.22 1.15-1.77.55-.55 1.11-.9 1.77-1.15.63-.25 1.36-.42 2.43-.47C8.94 2.01 9.28 2 12 2Zm0 1.8c-2.67 0-2.99.01-4.04.06-.98.04-1.51.21-1.86.35-.47.18-.8.4-1.15.75-.35.35-.57.68-.75 1.15-.14.35-.31.88-.35 1.86-.05 1.05-.06 1.37-.06 4.04s.01 2.99.06 4.04c.04.98.21 1.51.35 1.86.18.47.4.8.75 1.15.35.35.68.57 1.15.75.35.14.88.31 1.86.35 1.05.05 1.37.06 4.04.06s2.99-.01 4.04-.06c.98-.04 1.51-.21 1.86-.35.47-.18.8-.4 1.15-.75.35-.35.57-.68.75-1.15.14-.35.31-.88.35-1.86.05-1.05.06-1.37.06-4.04s-.01-2.99-.06-4.04c-.04-.98-.21-1.51-.35-1.86a3.1 3.1 0 0 0-.75-1.15 3.1 3.1 0 0 0-1.15-.75c-.35-.14-.88-.31-1.86-.35-1.05-.05-1.37-.06-4.04-.06Zm0 3.06a5.14 5.14 0 1 1 0 10.28 5.14 5.14 0 0 1 0-10.28Zm0 8.48a3.34 3.34 0 1 0 0-6.68 3.34 3.34 0 0 0 0 6.68Zm6.54-8.69a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0Z" /></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="visit" id="visit">
+      <div class="visit-grid">
+        <div>
+          <p class="kicker"><i></i> Come by</p>
+          <h2>Where to find us</h2>
+          <p class="muted">Everything is made and baked at Hive Kitchen in Channahon, and sold up front Tuesday through Saturday.</p>
+          <table>
+            <caption>Storefront hours</caption>
+            <tbody>
+              <tr><td>Monday</td><td class="shut">Closed</td></tr>
+              <tr><td>Tuesday</td><td>12:00 PM to 6:00 PM</td></tr>
+              <tr><td>Wednesday</td><td>12:00 PM to 9:00 PM</td></tr>
+              <tr><td>Thursday</td><td>12:00 PM to 9:00 PM</td></tr>
+              <tr><td>Friday</td><td>12:00 PM to 9:00 PM</td></tr>
+              <tr><td>Saturday</td><td>8:00 AM to 12:00 PM<br />4:00 PM to 9:00 PM</td></tr>
+              <tr><td>Sunday</td><td class="shut">Closed</td></tr>
+            </tbody>
+          </table>
+          <ul class="contact" style="list-style:none;padding:0;margin:0">
+            <li style="padding:0.5rem 0">25520 Pheasant Ln, Unit J, Channahon, IL</li>
+            <li style="padding:0.5rem 0"><a href="tel:7085146123">(708) 514-6123</a></li>
+            <li style="padding:0.5rem 0"><a href="mailto:kneadmoredough60410@gmail.com">kneadmoredough60410@gmail.com</a></li>
+            <li style="padding:0.5rem 0"><a href="https://www.google.com/maps/search/?api=1&query=25520+Pheasant+Ln,+Channahon,+IL" target="_blank" rel="noopener noreferrer">Open in Google Maps</a></li>
+            <li style="padding:0.5rem 0"><a href="https://www.facebook.com/profile.php?id=61576746550180" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+            <li style="padding:0.5rem 0"><a href="https://www.instagram.com/kneadmoredough60410/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          </ul>
+        </div>
+        <div class="map">
+          <iframe
+            title="Map to Knead More Dough at Hive Kitchen in Channahon"
+            src="https://maps.google.com/maps?ll=41.41885,-88.26734&q=25520+Pheasant+Ln,+Unit+J,+Channahon,+IL&z=16&output=embed"
+            loading="lazy"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote-wrap">
+      <blockquote>
+        <p>“Hands down, absolutely one of the best sourdough loaves I have had. I am a huge fan of the jalapeno and cheddar. I love the fact that I can visit The Hive in Channahon and pick up a few loaves. Also, the single pack chocolate cookies are freaking amazing.”</p>
+        <cite>
+          <strong>Vice Apostolovski</strong>
+          <span>Recommended on Facebook</span>
+        </cite>
+      </blockquote>
+    </section>
+
+    <div class="stripe" aria-hidden="true">
+      <span style="background:#4a2340"></span>
+      <span style="background:#d9a441"></span>
+      <span style="background:#93a183"></span>
+      <span style="background:#a32639"></span>
+      <span style="background:#4a2340"></span>
+      <span style="background:#d9a441"></span>
+    </div>
+    <footer>
+      <div class="foot">
+        <a class="wordmark" href="#top">Knead More <span>Dough</span></a>
+        <div class="row">
+          <a class="social" href="https://www.facebook.com/profile.php?id=61576746550180" target="_blank" rel="noopener noreferrer">Facebook</a>
+          <a class="social" href="https://www.instagram.com/kneadmoredough60410/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
+        <p>25520 Pheasant Ln, Unit J, Channahon, IL · (708) 514-6123</p>
+      </div>
+    </footer>
+    <script>
+      const btn = document.getElementById("menu-btn");
+      const panel = document.getElementById("mobile-nav");
+      btn.addEventListener("click", () => {
+        const open = panel.classList.toggle("open");
+        btn.setAttribute("aria-expanded", String(open));
+      });
+      panel.querySelectorAll("a").forEach((a) =>
+        a.addEventListener("click", () => {
+          panel.classList.remove("open");
+          btn.setAttribute("aria-expanded", "false");
+        }),
+      );
+    </script>
+  </body>
+</html>
